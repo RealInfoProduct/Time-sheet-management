@@ -1,1 +1,106 @@
-<p>project-master works!</p>
+<div class="add_employee_button">
+    <button type="button" (click)="companyAdd()" class="btn btn-secondary m-3" data-bs-toggle="modal"
+        data-bs-target="#CompanyDataAdd">
+       Add Company
+    </button>
+</div>
+    <!-- Modal Employee -->
+<div class="modal fade" id="CompanyDataAdd" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel" *ngIf="!isEdit">Add Company</h5>
+                <h5 class="modal-title" id="staticBackdropLabel" *ngIf="isEdit">Edit Company</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="projectMasterForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-12 companyInfo m-2">
+                                <label>Project Name</label>
+                                <input type="text" class="form-control" formControlName="projectName"
+                                    placeholder="Project Name">
+                            </div>
+                            <div class="col-12 companyInfo m-2">
+                                <label>Project Company</label>
+                                <input type="text" class="form-control" formControlName="projectCompany"
+                                    placeholder="Project Company">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-12 companyInfo m-2">
+                                <label>Project Technology</label>
+                                <input type="text" class="form-control" formControlName="projectTechnology"
+                                    placeholder="Project Technology">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add_button">
+                        <button data-bs-dismiss="modal" aria-label="Close" *ngIf="!isEdit" type="submit"
+                            (click)="submit()" [disabled]="projectMasterForm.invalid"
+                            class="btn btn-secondary">{{'ATTENDANCE.ADD_EMPLOYEE.SUBMIT' | translate }}</button>
+                        <button data-bs-dismiss="modal" aria-label="Close" *ngIf="isEdit" type="submit"
+                            (click)="submit()" [disabled]="projectMasterForm.invalid"
+                            class="btn btn-secondary">{{'ATTENDANCE.ADD_EMPLOYEE.UPDATE' | translate }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="row">
+        <div class="col-12">
+            <p-table [value]="projectList" [paginator]="true" [rows]="25"
+                [showCurrentPageReport]="true" [scrollable]="true" [scrollHeight]="height"
+                scrollDirection="both" responsiveLayout="scroll" [style]="{'margin-top': '8px'}"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [rowsPerPageOptions]="[10,25,50]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 10%">Sr No</th>
+                        <th style="width: 30%;">Project Name</th>
+                        <th style="width: 20%">Project Technology</th>
+                        <th style="width: 20%">Project Company</th>
+                        <th style="width: 20%">Action</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-i="rowIndex">
+                    <tr>
+                        <td style="width: 10%;">{{i+1}}</td>
+                        <td style="width: 30%">{{item.projectName}}</td>
+                        <td style="width: 20%">{{item.projectTechnology}}</td>
+                        <td style="width: 20%">{{item.projectCompany}}</td>
+                        <td style="width: 20%">
+                            <div class="icon" data-bs-toggle="modal"
+                                data-bs-target="#CompanyDataAdd" (click)="editEmployeeData(item)">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </div>
+                            <div class="icon" (click)="deleteEmployeeData(item)">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr class="record">
+                        <td colspan="12" class="p-text-center p-p-3">{{'ATTENDANCE.NO_RECDE_FOUND' | translate }}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<div class="spinner-center">
+    <p-progressSpinner *ngIf="isLoader" [style]="{width: '50px', height: '50px'}" styleClass="custom-spinner" strokeWidth="8" fill="var(--surface-ground)" animationDuration=".5s"></p-progressSpinner>
+</div>
+
+<p-confirmDialog header="Confirmation"></p-confirmDialog>
+
+<p-toast></p-toast>

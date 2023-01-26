@@ -50,3 +50,9 @@ export interface AuthResponse {
     localId:string
     registerd?:boolean
 }
+export interface projectMaster {
+    id:string,
+    projectName:string,
+    projectCompany:string,
+    projectTechnology:string,
+}
