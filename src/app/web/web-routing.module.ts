@@ -39,6 +39,10 @@ const routes: Routes = [{
       path: 'report',
       component: ReportComponent
     },
+    {
+      path: 'project-master',
+      loadChildren: () => import('../web/project-master/project-master.module').then(m => m.ProjectMasterModule)
+    }
   ]
 }];
 

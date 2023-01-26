@@ -24,8 +24,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddEmployeeComponent,
     BonusAttendanceComponent,
     ReportComponent,
-    ForgotpasswordComponent
-    
+    ForgotpasswordComponent,
   ],
   imports: [
     CommonModule,
