@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ThmMenuComponent } from './thm-menu.component';
+import { ChangepasswordComponent } from './changepassword.component';
 
-describe('ThmMenuComponent', () => {
-  let component: ThmMenuComponent;
-  let fixture: ComponentFixture<ThmMenuComponent>;
+describe('ChangepasswordComponent', () => {
+  let component: ChangepasswordComponent;
+  let fixture: ComponentFixture<ChangepasswordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ThmMenuComponent ]
+      declarations: [ ChangepasswordComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ThmMenuComponent);
+    fixture = TestBed.createComponent(ChangepasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
